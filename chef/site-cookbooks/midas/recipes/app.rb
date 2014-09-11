@@ -51,7 +51,6 @@ end
 bash 'startup' do
  code <<-HERE
     make init
-    make demo
     forever start app.js --prod
  HERE
   cwd node.midas.deploy_dir
