@@ -9,7 +9,8 @@ end
 
 git node.midas.deploy_dir do
   repository node.midas.git_repo
-  revision node.midas.git_branch
+  checkout_branch node.midas.git_branch
+  revision node.midas.revision
   enable_submodules true
   action :sync
 end
@@ -25,11 +26,9 @@ execute 'install code dependencies' do
   cwd node.midas.deploy_dir
 end
 
-execute 'config' do
- command <<-HERE
-  cp local.ex.js local.js
- HERE
-  cwd "#{node.midas.deploy_dir}/config"
+file "#{node.midas.deploy_dir}/config/local.js" do
+  content ::File.open("#{node.midas.deploy_dir/config/local.ex.js").read
+  action :create_if_missing
 end
 
 bash 'settings' do
@@ -51,7 +50,8 @@ end
 bash 'startup' do
  code <<-HERE
     make init
-    forever start app.js --prod
+    make demo
+    forever restart app.js --prod
  HERE
   cwd node.midas.deploy_dir
 end
