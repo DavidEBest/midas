@@ -16,9 +16,11 @@ git node.midas.deploy_dir do
 end
 
 # client config
-file "#{node.midas.deploy_dir}/assets/js/backbone/config/login.json" do
-  content ::File.open("#{node.midas.deploy_dir}/assets/js/backbone/config/login.ex.json").read
-  action :create_if_missing
+execute 'client config' do
+ command <<-HERE
+  cp -n login.ex.json login.json
+ HERE
+  cwd "#{node.midas.deploy_dir}/assets/js/backbone/config/"
 end
 
 execute 'install code dependencies' do 
@@ -32,12 +34,14 @@ execute 'install code dependencies' do
   cwd node.midas.deploy_dir
 end
 
-file "#{node.midas.deploy_dir}/config/local.js" do
-  content ::File.open("#{node.midas.deploy_dir}/config/local.ex.js").read
-  action :create_if_missing
+execute 'server config' do
+ command <<-HERE
+  cp -n local.ex.js local.js
+ HERE
+  cwd "#{node.midas.deploy_dir}/config"
 end
 
-bash 'settings' do
+bash 'server config/settings' do
  code <<-HERE
   for file in *.ex.js; do cp -n "$file" "${file/ex./}"; done
  HERE
