@@ -15,6 +15,12 @@ git node.midas.deploy_dir do
   action :sync
 end
 
+# client config
+file "#{node.midas.deploy_dir}/assets/js/backbone/config/login.json" do
+  content ::File.open("#{node.midas.deploy_dir}}/assets/js/backbone/config/login.ex.json").read
+  action :create_if_missing
+end
+
 execute 'install code dependencies' do 
   command <<-HERE
     npm install -g grunt-cli
@@ -27,16 +33,17 @@ execute 'install code dependencies' do
 end
 
 file "#{node.midas.deploy_dir}/config/local.js" do
-  content ::File.open("#{node.midas.deploy_dir/config/local.ex.js").read
+  content ::File.open("#{node.midas.deploy_dir}/config/local.ex.js").read
   action :create_if_missing
 end
 
 bash 'settings' do
  code <<-HERE
-  for file in *.ex.js; do cp "$file" "${file/ex./}"; done
+  for file in *.ex.js; do cp -n "$file" "${file/ex./}"; done
  HERE
   cwd "#{node.midas.deploy_dir}/config/settings"
 end
+
 
 file "#{node.midas.nginx_conf_dir}/#{node.midas.nginx_default}" do
   action :delete
