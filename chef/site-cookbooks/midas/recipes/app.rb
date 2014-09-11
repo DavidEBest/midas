@@ -17,7 +17,7 @@ end
 
 # client config
 file "#{node.midas.deploy_dir}/assets/js/backbone/config/login.json" do
-  content ::File.open("#{node.midas.deploy_dir}}/assets/js/backbone/config/login.ex.json").read
+  content ::File.open("#{node.midas.deploy_dir}/assets/js/backbone/config/login.ex.json").read
   action :create_if_missing
 end
 
