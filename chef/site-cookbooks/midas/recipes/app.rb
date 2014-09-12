@@ -25,6 +25,7 @@ execute 'install code dependencies' do
   command <<-HERE
     npm install -g grunt-cli
     npm install -g forever 
+    forever stop app.js --prod
     npm link sails-postgresql
     npm install
     make build
