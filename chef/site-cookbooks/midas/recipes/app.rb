@@ -16,12 +16,10 @@ git node.midas.deploy_dir do
 end
 
 # client config
-execute 'client config' do
- command <<-HERE
-  cp -n login.ex.json login.json
- HERE
-  cwd "#{node.midas.deploy_dir}/assets/js/backbone/config/"
-end
+#execute 'client config' do
+# cwd "#{node.midas.deploy_dir}/assets/js/backbone/config/"
+# command "cp -n login.ex.json login.json"
+#end
 
 execute 'install code dependencies' do 
   command <<-HERE
