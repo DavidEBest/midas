@@ -52,8 +52,8 @@ describe('project:', function() {
         // check that the values returned are correct 
         assertProject(b, draftProject)
         assert.equal(b.like, false);
+        done();
       });
-      done();
     });
 
     it('view public project', function (done) {
@@ -65,10 +65,31 @@ describe('project:', function() {
         // check that the values returned are correct 
         assertProject(b, publicProject)
         assert.equal(b.like, false);
+        done();
       });
-      done();
     });
 
+    it('add empty project owner fails', function (done) {
+      request.post({ url: conf.url + '/projectowner',
+          form: { projectId: publicProject.id },
+        }, function (err, response, body) {
+          assert.equal(response.statusCode, 400);
+          done();
+      });
+    });
+
+    it('add project owner', function (done) {
+      request.post({ url: conf.url + '/projectowner',
+          form: { projectId: publicProject.id, userId: 2 },
+        }, function (err, response, body) {
+          console.log(body);
+          assert.equal(response.statusCode, 200);
+          var b = JSON.parse(body);
+          assert.equal(b.projectId, publicProject.id);
+          assert.equal(b.userId, 2);
+          done();
+      });
+    });
 
   });
   
@@ -83,8 +104,8 @@ describe('project:', function() {
                   function (err, response, body) {
         if (err) { return done(err); }
         assert.equal(response.statusCode, 403);
+        done();
       });
-      done();
     });
 
     it('view public project', function (done) {
@@ -96,8 +117,8 @@ describe('project:', function() {
         // check that the values returned are correct 
         assertProject(b, publicProject)
         assert.equal(b.like, false);
+        done();
       });
-      done();
     });
   });
 });

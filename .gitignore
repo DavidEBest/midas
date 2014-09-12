@@ -24,6 +24,7 @@ config/settings/sources.js
 config/settings/tags.js
 config/settings/emailTemplates.js
 config/settings/notifications.js
+assets/js/backbone/config/login.json
 
 # Ignore production files
 assets/prod/js

@@ -5,6 +5,7 @@
  * @description	:: Contains logic for handling requests.
  */
 
+var _ = require('underscore');
 var projUtils = require('../services/utils/project');
 
 module.exports = {
@@ -12,8 +13,15 @@ module.exports = {
   create: function (req, res) {
     // Look up project
     var params = _.extend(req.body || {}, req.params);
-    ProjectOwner.findByProjectId(params.projectId, function (err, proj) {
+    if ((_.isUndefined(params.userId)) || (_.isUndefined(params.projectId))) {
+      return res.send(400, { message: 'Must specify both userId and projectId. '});
+    }
+    ProjectOwner.findOne({ projectId: params.projectId, userId: params.userId }, function (err, origOwner) {
       if (err) { return res.send(400, { message: 'Error finding project owners.' } ); }
+      if (origOwner) {
+        // owner already exists, abort
+        return res.send(origOwner);
+      }
       // create new owner
       ProjectOwner.create(params, function (err, owner) {
         if (err) { return res.send(400, { message: 'Error creating owner.' } ); }

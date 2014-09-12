@@ -10,7 +10,7 @@ end
 git node.midas.deploy_dir do
   repository node.midas.git_repo
   checkout_branch node.midas.git_branch
-  revision node.midas.revision
+  revision node.midas.git_revision
   enable_submodules true
   action :sync
 end
@@ -61,8 +61,7 @@ end
 bash 'startup' do
  code <<-HERE
     make init
-    make demo
-    forever restart app.js --prod
+    forever start app.js --prod
  HERE
   cwd node.midas.deploy_dir
 end

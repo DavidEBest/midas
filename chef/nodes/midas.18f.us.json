@@ -1,0 +1,10 @@
+{
+  "run_list": ["midas"],
+  "automatic": {
+    "ipaddress": "midas.18f.us"
+  },
+  "midas": {
+    "git_repo": "https://github.com/ultrasaurus/midas.git",
+    "git_branch": "devel-chef"
+  }
+}

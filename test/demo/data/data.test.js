@@ -19,8 +19,8 @@ describe('demo:', function() {
         if (err) return done(err);
         utils.user_put(request, user.id, user_attrs, function (err, userObj) {
           console.log('user created:', userObj.name);
-          user.obj = userObj;
-          user.id = userObj.id;
+          user_attrs.obj = userObj;
+          user_attrs.id = userObj.id;
           return done(err);
         });
       });
