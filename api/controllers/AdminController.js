@@ -5,6 +5,7 @@
  * @description	:: Administrative functions only available to admin users
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
+var async = require('async');
 
 module.exports = {
 
@@ -30,6 +31,103 @@ module.exports = {
       };
     }
 
+    var addUserMetrics = function(user, callback) {
+      // check for lockouts
+      user.locked = false;
+      if (user.passwordAttempts >= sails.config.auth.auth.local.passwordAttempts) {
+        user.locked = true;
+      }
+      async.parallel([
+        // add project counts
+        function(done) {
+          // add created projects
+          user.projectsCreatedOpen = 0;
+          user.projectsCreatedClosed = 0;
+          ProjectOwner.find().where({id:user.id}).exec(function(err, owners) {
+            if (err) { done('Failed to retrieve ProjectOwners ' +  err);}
+            if (owners.length !== 0) {
+              var projIds = [];
+              for (var j in owners) {
+                projIds.push(owners[j].projectId);
+              }
+              Project.find().where({id: projIds}).exec(function(err, projects) {
+                if (err) { done('Failed to retrieve projects ' +  err);}
+                async.each(projects, function(project, cb) {
+                  if (project.state === "public") {
+                    user.projectsCreatedOpen++;
+                    cb();
+                  }
+                  else if (project.state === "closed") {
+                    user.projectsCreatedClosed++;
+                    cb();
+                  }
+                }, function(err) {
+                  done(null);
+                });
+              });
+            } else {
+              done(null);
+            }
+          });
+        },
+        // add task counts
+        function(done) {
+          user.tasksCreatedOpen = 0;
+          user.tasksCreatedClosed = 0;
+          Task.find().where({userId:user.id}).exec(function(err, tasks) {
+            if (err) { done('Failed to retrieve tasks' + err);}
+            if (tasks.count !== 0) {
+              async.each(tasks, function(task, cb) {
+                if (task.state === "public") {
+                  user.tasksCreatedOpen++;
+                  cb();
+                } else if (task.state === "closed") {
+                  user.tasksCreatedClosed++;
+                  cb();
+                }
+              }, function(err) {
+                done(null);
+              });
+            } else {
+              done(null);
+            }
+          });
+        },
+        // add volunteer counts
+        function(done) {
+          user.volCountOpen = 0;
+          user.volCountClosed = 0;
+          Volunteer.find().where({userId:user.id}).exec(function(err, volunteers) {
+            if (err) { done('Failed to retrieve volunteers ' +  err);}
+            if (volunteers.length !== 0) {
+              var taskIds = [];
+              for (var i in volunteers) {
+                taskIds.push(volunteers[i].taskId);
+              }
+              Task.find().where({id: taskIds}).exec(function(err, tasks) {
+                if (err) { done('Failed to retrieve tasks for volunteers ' +  err);}
+                async.each(tasks, function(task, cb) {
+                  if (task.state === "public") {
+                    user.volCountOpen++;
+                    cb();
+                  }
+                  else if (task.state === "closed") {
+                    user.volCountClosed++;
+                    cb();
+                  }
+                }, function(err) {
+                  done(null);
+                });
+              });
+            } else {
+              done(null);
+            }
+          });
+        }], function(err) { 
+          callback(null);
+        });
+    };
+
     // find users that meet this criteria
     User.find()
     .where(where)
@@ -40,20 +138,17 @@ module.exports = {
       // count the total number of users
       User.count(function (err, count) {
         if (err) { return res.send(400, { message: 'Error counting users', err: err}); }
-        // check for lockouts
-        for (var i in users) {
-          users[i].locked = false;
-          if (users[i].passwordAttempts >= sails.config.auth.auth.local.passwordAttempts) {
-            users[i].locked = true;
-          }
-        }
-        // return a paginated object
-        return res.send({
-          page: page,
-          limit: Math.min(users.length, limit),
-          count: count,
-          users: users,
-          q: query
+        async.each(users, addUserMetrics, function(err) {
+          if (err) { res.send(400, { message: 'Error retrieving metrics for users.', err: err}); }
+          // return a paginated object
+          sails.log.debug(users);
+          return res.send({
+            page: page,
+            limit: Math.min(users.length, limit),
+            count: count,
+            users: users,
+            q: query
+          });
         });
       });
     });

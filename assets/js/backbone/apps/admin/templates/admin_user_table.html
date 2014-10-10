@@ -4,6 +4,9 @@
       <th class="admin-user-id">#</th>
       <th>Name</th>
       <th>Email</th>
+      <th>Projects Created (open/closed)</th>
+      <th>Tasks Created (open/closed)</th>
+      <th>Volunteer (open/close)</th>
       <th class="admin-user-checkbox">Enabled</th>
       <% if (login.local.enabled === true) { %>
       <th class="admin-user-checkbox">Password</th>
@@ -29,6 +32,15 @@
       </td>
       <td class="admin-table-username">
         <a class="link-backbone" href="/profile/<%- u.id %>"><%- u.username %></a>
+      </td>
+      <td class="admin-table-projects">
+        <a class="link-backbone" href="/profile/<%- u.id %>"><%- u.projectsCreatedOpen %> / <%- u.projectsCreatedClosed %></a>
+      </td>
+      <td class="admin-table-tasks">
+        <a class="link-backbone" href="/profile/<%- u.id %>"><%- u.tasksCreatedOpen %> / <%- u.tasksCreatedClosed %></a>
+      </td>
+      <td class="admin-table-volunteer">
+        <a class="link-backbone" href="/profile/<%- u.id %>"><%- u.volCountOpen %> / <%- u.volCountClosed %></a>
       </td>
       <td>
         <button type="button" class="btn btn-default btn-xs admin-user-enable" data-toggle="tooltip" data-placement="top" title="Enable" <% if (u.disabled !== true) { %>style="display:none;"<% } %>><i class="icon-remove-sign icon-red icon-center"></i></button>
