@@ -7,5 +7,9 @@
   },
   "home": {
     "logged_in_path": "/projects"
+  },
+  "browse": {
+    "pageSize" : 27,
+    "useInfiniteScroll" : false
   }
 }
