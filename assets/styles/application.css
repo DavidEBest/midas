@@ -1472,6 +1472,10 @@ ul.task-tags > li {
   height: 400px;
 }
 
+#home {
+  background-color: #fff;
+}
+
 #home .splash-center {
   position: absolute;
   top: 50%;
@@ -1512,4 +1516,48 @@ ul.task-tags > li {
 }
 .btn-midas:active {
   color: #eee;
+}
+
+
+.inline-block-center {
+  text-align: center;
+}
+@media screen and (min-width: 980px) {
+  .inline-block-center {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+
+.value-prop {
+  text-align: center;
+  color: #428bca;
+  text-decoration: none;
+  display: inline-block;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 0 auto;
+  width: 25%;
+}
+
+.value-prop .text {
+  font-size: 18px;
+
+}
+
+.value-prop .icon {
+  display: block;
+  margin-bottom: 10px;
+}
+@media screen and (min-width: 320px) {
+  .value-prop .icon {
+    font-size: 60px;
+    line-height: 60px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .value-prop .icon {
+    font-size: 96px;
+    line-height: 96px;
+  }
 }
