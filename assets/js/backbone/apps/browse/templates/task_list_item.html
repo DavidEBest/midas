@@ -15,7 +15,7 @@
     <% _.each(tagShow, function (tagType) { %>
 
       <% if (tags[tagType]) { %>
-      <div class="task-list-tags c0" style="overflow:hidden;text-overflow: ellipsis; white-space:nowrap">
+      <div class="task-list-tags c0 task-single-overflow">
         <i class="task-list-icon-center <%= tagConfig.tags[tagType].icon %>"></i>
         <% _.each(tags[tagType], function (t, i) { %>
           <%= t.name %><% if (i + 1 < tags[tagType].length) { %>,<% } %>
@@ -35,7 +35,7 @@
         <div class="task-list-requested">requested by</div>
         <div class="task-list-name"><%- item.user.name %></div>
         <% if (item.user.agency) { %>
-        <div class="task-list-agency" style="overflow:hidden;text-overflow: ellipsis; white-space:nowrap"><%= item.user.agency.tag.name %></div>
+        <div class="task-list-agency task-single-overflow"><%= item.user.agency.tag.name %></div>
         <% } %>
       </div>
     </div>

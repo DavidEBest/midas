@@ -56,7 +56,7 @@ define([
         if ( this.data.page == 1 ){
           var start = 0;
         } else {
-          var start = this.data.page * this.data.pageSize;
+          var start = (this.data.page-1) * this.data.pageSize;
         }
         var limit    = start + this.data.pageSize;
       } else {

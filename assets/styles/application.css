@@ -1355,6 +1355,11 @@ ul.task-tags > li {
 /**********************************
 =  TASKS INFINITE SCROLL OVERFLOW
 ***********************************/
+  .task-single-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+  }
 
   .task-desc-overflow-multi{
     overflow: hidden;
@@ -1544,6 +1549,8 @@ ul.task-tags > li {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   color: white;
   background-color: #000000;
   background-color: rgba(0, 0, 0, 0.8);

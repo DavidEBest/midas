@@ -13,6 +13,6 @@
   },
   "github_key" : "%GITHUB_KEY%",
   "run_list": [
-    "midas"
+    "role[openopps]"
   ]
 }

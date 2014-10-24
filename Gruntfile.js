@@ -224,8 +224,8 @@ module.exports = function (grunt) {
           expand: true,
           flatten: true,
           cwd: './assets',
-          src: ['styles/font-awesome/font/*'],
-          dest: 'assets/prod/font'
+          src: ['styles/font-awesome/fonts/*'],
+          dest: 'assets/prod/fonts'
         },
         {
           expand: true,
