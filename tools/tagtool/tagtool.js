@@ -31,10 +31,10 @@ else {
 
 // open database
 var client = new pg.Client({
-  user: config.connections.postgresql.user, 
-  password: config.connections.postgresql.password,
-  database: config.connections.postgresql.database,
-  host: config.connections.postgresql.host,
+  user: config.adapters.postgresql.user, 
+  password: config.adapters.postgresql.password,
+  database: config.adapters.postgresql.database,
+  host: config.adapters.postgresql.host,
   port: 5432
 });
 
