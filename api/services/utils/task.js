@@ -17,22 +17,22 @@ var authorized = function (id, userId, cb) {
     if (userId && (userId == task.userId)) {
       task.isOwner = true;
     }
-    // If not the owner, check if there is a project
+    // If not the owner, check if there is a public task.
     if (!task.projectId) {
-      if ((task.state === 'open') || (task.state == 'closed') || (userId == task.userId)) {
+      if ((task.state !== 'draft') || (userId == task.userId)) {
         return cb(null, task);
       }
       return cb(null, null);
     }
-    // check if the user is authorized for the project
-    // or the project is open
+    // check if the user is authorized for the task
+    // or the project is not in a draft state 
     util.authorized(task.projectId, userId, function (err, proj) {
       if (err) { return cb(err, null); }
       if (!err && !proj) { return cb(null, null); }
       task.project = proj;
       // user has access to the project, but is not the task owner
       // check the task state to make sure it is publicly accessible
-      if ((task.state === 'open') || (task.state == 'closed') || (task.isOwner === true)) {
+      if ((task.state !== 'draft') || (task.isOwner === true)) {
         return cb(null, task);
       }
       // In any other state, you have to be the owner.  Denied.
