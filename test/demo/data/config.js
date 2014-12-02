@@ -1,114 +1,129 @@
 module.exports = {
   url: 'http://localhost:1337/api',
   users: {
-    'tyrion': {
-      name: 'Tyrion Lannister',
-      username: 'tyrion@gameofthrones.com',
-      password: 'tyrionT1!',
-      title: 'The Imp',
-      agency: 'lannister',
-      location: 'kl',
-      photo: 'assets/users/tyrion.jpg'
+    'tammy': {
+      name: 'Tammy Craig',
+      username: 'kids@test.gov',
+      password: 'kidskidsT1!',
+      title: 'Social Media Director',
+      agency: 'Dept of Education',
+      location: 'DC',
+      photo: 'assets/users/tammy.jpg'
     },
-    'arya': {
-      name: 'Arya Stark',
-      username: 'arya@gameofthrones.com',
-      password: 'aryaAA1!',
-      title: 'Youngest daughter of Eddard Stark',
-      agency: 'stark',
-      location: 'winterfell',
-      photo: 'assets/users/arya.jpg'
+    'pran': {
+      name: 'Pran Mhasalkar',
+      username: 'pran@test.gov',
+      password: 'pranpranT1!',
+      title: 'Special Advisor',
+      agency: 'OSTP',
+      location: 'DC',
+      photo: 'assets/users/pran.jpg'
     },
-    'danny': {
-      name: 'Daenerys Targaryen',
-      username: 'danny@gameofthrones.com',
-      password: 'dannyD1!',
-      title: 'Mother of Dragons',
-      agency: 'targaryen',
-      location: 'astapor',
-      photo: 'assets/users/danny.jpg'
+    'alan': {
+      name: 'Alan Barret',
+      username: 'alan@test.gov',
+      password: 'alanalanT1!',
+      title: 'Deputy Secretary',
+      agency: 'USDA',
+      location: 'DC',
+      photo: 'assets/users/alan.jpg'
     },
     'ned': {
       name: 'Eddard Stark',
       username: 'ned@gameofthrones.com',
       password: 'nednedN1!',
       title: 'Lord of Winterfell and Warden of the North',
-      agency: 'stark',
-      location: 'kl',
+      agency: 'GSA',
+      location: 'San Francisco, CA',
       photo: 'assets/users/ned.jpg'
     },
   },
   tags: {
-    'fight': {
+    'Writing': {
       type: 'skill',
-      name: 'Fighting'
+      name: 'Writing'
     },
-    'kidnap': {
+    'Social Media': {
       type: 'skill',
-      name: 'Kidnapping'
+      name: 'Social Media'
     },
-    'usurp': {
+    'UX': {
       type: 'skill',
-      name: 'Usurping'
+      name: 'UX'
     },
-    'rebel': {
+    'Health': {
       type: 'topic',
-      name: 'Rebellion'
+      name: 'Health'
     },
-    'battle': {
+    'Education': {
       type: 'topic',
-      name: 'Battles'
+      name: 'Education'
     },
-    'stark': {
+    'USDA': {
       type: 'agency',
-      name: 'House Stark'
+      name: 'USDA'
     },
-    'lannister': {
+    'OSTP': {
       type: 'agency',
-      name: 'House Lannister'
+      name: 'OSTP'
     },
-    'baratheon': {
+    'GSA': {
       type: 'agency',
-      name: 'House Baratheon'
+      name: 'GSA'
     },
-    'tully': {
+    'Dept of Education': {
       type: 'agency',
-      name: 'House Tully'
+      name: 'Dept of Education'
     },
-    'targaryen': {
+    'National Parks Service': {
       type: 'agency',
-      name: 'House Targaryen'
+      name: 'National Parks Service'
     },
-    'westeros': {
+    'DC': {
       type: 'location',
-      name: 'Westeros'
+      name: 'DC'
     },
-    'winterfell': {
+    'GSA HQ, 1800 F St, Washington, DC': {
       type: 'location',
-      name: 'Winterfell'
+      name: 'GSA HQ, 1800 F St, Washington, DC'
     },
-    'kl': {
+    'The White House, South Court': {
       type: 'location',
-      name: 'King\'s Landing'
+      name: 'The White House, South Court'
     },
-    'astapor': {
+    'San Francisco, CA': {
       type: 'location',
-      name: 'Astapor'
+      name: 'San Francisco, CA'
     }
   },
   projects: [
+   {
+      state: 'open',
+      title: 'Health and Safety',
+      description: 'We are interested in projects that improve the health and safety of the American people.',
+      cover: 'assets/projects/roberts_rebellion.png',
+      owner: 'alan',
+      tags: ['Writing', 'Social Media'],
+      comments: [ ],
+      events: [ ],
+      tasks: [ {
+          state: 'open',
+          title: 'Validate USDA Data',
+          description: 'Some addresses in the USDA Meat & Poultry Inspection Directory need validating and correcting to ensure they can be leveraged for geospatial mapping. You will determine if the address is suitable for mapping or mailing. Get a quick intro to geo-spatial analysis and help make food inspection more efficient.'
+        }
+       ]
+    },
     {
       state: 'open',
-      title: 'Robert\'s Rebellion',
-      description: 'Robert\'s Rebellion was a civil war amongst the Great Houses of Westeros that took place approximately seventeen years before the TV series began, and lasted about one year. It displaced the royal House Targaryen and saw most of its members wiped out, with only two survivors who fled into exile across the sea. House Baratheon became the new royal house after the war\'s conclusion.',
+      title: 'Education Resources',
+      description: 'We are focused on improving access to education resources for K-12 through use of digital tools, online access and social media.',
       cover: 'assets/projects/roberts_rebellion.png',
-      owner: 'ned',
-      owners: ['arya'],
-      tags: ['fight', 'kidnap', 'usurp', 'rebel', 'battle', 'stark', 'lannister', 'baratheon', 'tully', 'westeros'],
+      owner: 'tammy',
+      tags: ['Writing', 'Social Media'],
       comments: [
         {
           topic: true,
-          user: 'arya',
+          user: 'alan',
           value: 'Swift as a deer. Quiet as a shadow. Fear cuts deeper than swords. Quick as a snake. Calm as still water.',
           children: [
             {
@@ -123,15 +138,15 @@ module.exports = {
           value: 'The man who passes the sentence should swing the sword. ',
           children: [
             {
-              user: 'arya',
+              user: 'ned',
               value: 'He\'s just stupid. He likes to polish helmets and beat on swords with hammers.'
             },
             {
-              user: 'tyrion',
+              user: 'tammy',
               value: 'I much like my head. I don\'t want to see it removed just yet.'
             },
             {
-              user: 'danny',
+              user: 'pran',
               value: 'I don\'t like your head. And stop your family from trying to kill me.'
             }
           ]
@@ -139,21 +154,26 @@ module.exports = {
       ],
       events: [
         {
-          title: 'Battle of Summerhall',
-          description: 'Attack Lords Grandison, Cafferen, and Fell before they attack first.  Plan is to capture his son, Silveraxe.',
-          location: 'Targaryen castle, Summerhall, Westeros'
+          title: 'Open Testing Evening',
+          description: 'Bring all your devices and a laptp if you have one. During this live testing session, you will get the chance to meet other folks in the who are helping make this happen.',
+          location: 'GSA HQ, 1800 F St, Washington, DC'
         },
         {
-          title: 'Sack of King\'s Landing',
-          description: 'Assemble Lannister forces to sack the city in Robert\'s name.  Watch out for Tywin\'s son Jamie; he\'s the hand of King Aerys.',
-          location: 'King\'s Landing, Westeros'
+          title: 'Awards Ceremony',
+          description: 'Please join us in honoring the project leaders who have made this program so successful.',
+          location: 'The White House, South Court'
         }
       ],
       tasks: [
         {
           state: 'open',
-          title: 'Kidnap the Targaryen heirs',
-          description: 'Viserys and Daenerys are at Dragonstone.  To keep the Targaryens from regaining the Iron Throne, the child heirs must be captured and returned to King\'s landing.'
+          title: 'Who to follow on Twitter? Kids.gov wants to know!',
+          description: 'Kids.gov, the official web portal for kids, is putting together a list of influencers that the site should be following and interacting with on Twitter.'
+        },
+        {
+          state: 'open',
+          title: 'Is Challenge.gov ready to launch?',
+          description: 'You’ll be the critical eye revieing federal challenge and prize competitions, checking links and making sure everything works. It would be helpful to have people who are not familiar with challenge and prize program to help. This is a simple way to gain experience with web software release practives or a great way to learn about this innovative program.'
         }
       ]
     }

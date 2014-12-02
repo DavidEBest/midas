@@ -90,6 +90,7 @@ describe('demo:', function() {
   it('projects', function (done) {
     var process = function (proj, done) {
       var user = conf.users[proj.owner];
+      console.log(proj.owner, user.username, proj);
 
       // sub-functions to create comments
       var createComments = function (comments, parentId, done) {
@@ -118,6 +119,7 @@ describe('demo:', function() {
           });
         };
         async.eachSeries(comments, processComment, function (err) {
+          console.log('processComment');
           done(err);
         });
       };
@@ -205,6 +207,7 @@ describe('demo:', function() {
       var startTags = function (tag, done) {
         var request = utils.init();
         var createTag = function (tag, done) {
+            console.log("==", tag, conf.tags[tag]);
           var t = {
             tagId: conf.tags[tag].id,
             projectId: proj.id
