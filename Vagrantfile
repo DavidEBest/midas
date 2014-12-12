@@ -63,7 +63,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.berkshelf.berksfile_path = "chef/Berksfile"  
 
   config.vm.provision "chef_solo" do |chef|
-    chef.cookbooks_path = "chef/site-cookbooks"
     chef.verbose_logging = true;
     chef.log_level = "debug";
     chef.roles_path = "chef/roles"
