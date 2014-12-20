@@ -9,8 +9,12 @@
 module.exports = {
   find: function (req, res) {
     UserSetting.findByUserId(req.user[0].id)
-    .done(function(err,settings){
+    .exec(function(err,settings){
       return res.send(settings);
     });
+  },
+
+  findOne: function(req, res) {
+    module.exports.find(req, res);
   }
 };

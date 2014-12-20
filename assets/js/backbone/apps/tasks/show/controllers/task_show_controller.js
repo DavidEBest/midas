@@ -255,7 +255,7 @@ define([
       //does this belong somewhere else?
       if ( _.isNull(userId) ){ return null; }
       $.ajax({
-        url: '/api/usersetting/'+userId,
+        url: '/api/usersetting/'+userId.id,
         type: 'GET',
         dataType: 'json'
       })

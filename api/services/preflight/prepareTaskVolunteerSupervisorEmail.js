@@ -36,7 +36,7 @@ module.exports = {
       }
       // store userEmail object as metadata
       content.fields.metadata.userEmail = userEmail;
-      Task.findOneById(fields.callerId).done(function (err, task) {
+      Task.findOneById(fields.callerId).exec(function (err, task) {
         if (err) { sails.log.debug(err); cb(null, content); return false;}
         //TASK OWNERS NAME
         userUtils.getUser(task.userId,fields.recipientId,function(err,requestor){
