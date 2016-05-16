@@ -7,7 +7,7 @@
 var async = require('async');
 
 function getFile (a, cb) {
-  File.findOneById(a.fileId, function (err, file) {
+  Upload.findOneById(a.fileId, function (err, file) {
     if (file) {
       delete file['data'];
       a.file = file;
@@ -32,10 +32,6 @@ function findAll (target, req, res) {
 };
 
 module.exports = {
-
-  findAllByProjectId: function (req, res) {
-    return findAll('projectId', req, res);
-  },
 
   findAllByTaskId: function (req, res) {
     return findAll('taskId', req, res);
